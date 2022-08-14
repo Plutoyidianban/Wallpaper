@@ -4,9 +4,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="msg_failed_to_get_picture">Failed to get image</string>
-    <string name="lbl_pick_single_image">Select single image</string>
-    <string name="set_for_wallpaper">Set for wallpaper</string>
-    <string name="txt_info">Quick sample for selecting images on Android</string>
+    <string name="lbl_pick_single_image">选择照片</string>
+    <string name="set_for_wallpaper">设置为静态壁纸 </string>
+    <string name="txt_info">请在照片中选择一张作为壁纸</string>
     <string name="msg_failed_to_get_intent_data">Failed to get intent data</string>
     <string name="select_picture">Select Picture</string>
 </resources>

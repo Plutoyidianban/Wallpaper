@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-
     // this is the action code we use in our intent,
     // this way we know we're looking at the response from our own action
     private static final int SELECT_SINGLE_PICTURE = 101;
@@ -29,9 +28,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String IMAGE_TYPE = "image/*";
     private final String TAG="MainActivity";
     private ImageView selectedImagePreview;
-    private Bitmap choosephoto;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,14 +36,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG,"MainActivity has started");
         final WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
 
-        // no need to cast to button view here since we can add a listener to any view, this
-        // is the single image selection
         findViewById(R.id.btn_pick_single_image).setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View arg0) {
-
-                // in onCreate or any event where your want the user to
-                // select a file
                 Intent intent = new Intent();
                 intent.setType(IMAGE_TYPE);
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -55,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
                         getString(R.string.select_picture)), SELECT_SINGLE_PICTURE);
             }
         });
-
-        ImageView chooseImage = (ImageView)findViewById(R.id.image_preview);
+        selectedImagePreview = (ImageView)findViewById(R.id.image_preview);
 
         // multiple image selection
         findViewById(R.id.set_for_wallpaper).setOnClickListener(new View.OnClickListener(){
@@ -65,24 +55,23 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     // set the wallpaper by calling the setResource function and
                     // passing the drawable file
-                    Bitmap choosephoto = ((BitmapDrawable)chooseImage.getDrawable()).getBitmap();
+                    Bitmap choosephoto = ((BitmapDrawable)selectedImagePreview.getDrawable()).getBitmap();
                     wallpaperManager.setBitmap(choosephoto);
                 } catch (IOException e) {
-                    // here the errors can be logged instead of printStackTrace
                     e.printStackTrace();
                 }
             }
         });
-
-        selectedImagePreview = (ImageView)findViewById(R.id.image_preview);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_SINGLE_PICTURE) {
-
+                /*搞清楚Uri的含义*/
                 Uri selectedImageUri = data.getData();
+                String pathUri = getPath(selectedImageUri);
+                Log.d(TAG,"the selected photo's pathUri: "+selectedImageUri);
                 try {
                     selectedImagePreview.setImageBitmap(new UserPicture(selectedImageUri, getContentResolver()).getBitmap());
                 } catch (IOException e) {

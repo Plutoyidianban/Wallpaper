@@ -141,7 +141,7 @@ public class UserPicture {
 
         if (!getStoredDimensions())
             throw new InvalidObjectException(null);
-
+        /*搞明白这个RectF到底是干啥的*/
         RectF rect = new RectF(0, 0, storedWidth, storedHeight);
         orientation.mapRect(rect);
         int width = (int) rect.width();
