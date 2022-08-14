@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(,"MainActivity","MainActivity has started");
+        Log.d(TAG,"MainActivity has started");
         final WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
 
         // no need to cast to button view here since we can add a listener to any view, this
